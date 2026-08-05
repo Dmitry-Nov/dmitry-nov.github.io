@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дмитрий | Веб-разработка</title>
+
+    <meta property="og:title" content="Портфолио Дмитрия" />
+    <meta property="og:description" content="Создаю стильные сайты под ключ." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0b12;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+
+        @keyframes nebula {
+            0% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+            50% { transform: translate(-40px, 30px) scale(1.1) rotate(10deg); }
+            100% { transform: translate(40px, -20px) scale(0.9) rotate(-10deg); }
+        }
+        .neon-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+        .neon-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; animation: nebula 20s ease-in-out infinite alternate; }
+        .blob-1 { width: 700px; height: 700px; background: #6c2bd9; top: -200px; right: -200px; animation-duration: 25s; }
+        .blob-2 { width: 600px; height: 600px; background: #1d7ab3; bottom: -150px; left: -150px; animation-duration: 18s; animation-delay: -4s; }
+        .blob-3 { width: 450px; height: 450px; background: #d63384; top: 40%; left: 40%; animation-duration: 22s; animation-delay: -6s; opacity: 0.3; }
+
+        h1, h2, h3, .title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+        .accent { color: #a855f7; }
+
+        header { padding: 24px 0; position: relative; z-index: 10; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.2rem; font-weight: 600; color: #fff; }
+        .logo span { color: #a855f7; }
+        .header-contacts a { margin-left: 20px; font-size: 0.9rem; color: #aaa; transition: 0.3s; }
+        .header-contacts a:hover { color: #a855f7; }
+
+        .hero { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; padding: 80px 0 40px; align-items: center; }
+        .hero-image { position: relative; width: 100%; aspect-ratio: 1 / 1; border-radius: 30px; overflow: hidden; border: 1px solid rgba(168, 85, 247, 0.2); box-shadow: 0 0 40px rgba(168, 85, 247, 0.1); }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-content h1 { font-size: 3.8rem; line-height: 1.0; color: #fff; margin-bottom: 16px; }
+        .hero-content .subtitle { font-size: 1.2rem; color: #bbb; margin-bottom: 24px; font-weight: 300; }
+        .about-text { font-size: 1rem; color: #ccc; border-left: 3px solid #a855f7; padding-left: 16px; margin-bottom: 30px; }
+        .about-text strong { color: #fff; }
+
+        .btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 100px; font-weight: 500; border: none; transition: 0.3s ease; cursor: pointer; text-align: center; }
+        .btn-primary { background: #a855f7; color: #fff; box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+        .btn-primary:hover { background: #9333ea; transform: scale(1.03); box-shadow: 0 0 40px rgba(168, 85, 247, 0.4); }
+        .btn-outline { background: transparent; border: 1px solid #a855f7; color: #a855f7; }
+        .btn-outline:hover { background: #a855f7; color: #fff; box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+
+        .works { padding: 60px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .works h2 { font-size: 2.6rem; margin-bottom: 40px; color: #fff; position: relative; display: inline-block; }
+        .works h2::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: #a855f7; }
+        .works-grid { display: grid; grid-template-columns: 1fr; max-width: 700px; margin: 0 auto; gap: 20px; }
+
+        .work-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; padding: 24px; transition: 0.3s ease; }
+        .work-card:hover { transform: translateY(-6px); border-color: rgba(168, 85, 247, 0.3); box-shadow: 0 0 30px rgba(168, 85, 247, 0.05); }
+        .work-card h3 { font-size: 1.4rem; margin-bottom: 6px; color: #fff; }
+        .work-card p { font-size: 0.95rem; color: #999; margin-bottom: 14px; }
+        .work-card .tag { display: inline-block; padding: 4px 14px; border-radius: 30px; background: rgba(168, 85, 247, 0.15); color: #a855f7; font-size: 0.75rem; font-weight: 500; margin-right: 6px; }
+        .work-card .work-link { display: inline-block; margin-top: 8px; font-weight: 600; color: #a855f7; border-bottom: 1px solid transparent; transition: 0.2s; }
+        .work-card .work-link:hover { border-bottom-color: #a855f7; }
+
+        .reviews { padding: 60px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .reviews h2 { font-size: 2.6rem; margin-bottom: 40px; color: #fff; position: relative; display: inline-block; }
+        .reviews h2::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: #a855f7; }
+        .reviews-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 700px; margin: 0 auto; gap: 20px; }
+        .review-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; padding: 24px; text-align: center; }
+        .review-card p { font-style: italic; color: #ccc; margin-bottom: 12px; }
+        .review-card .author { color: #a855f7; font-weight: 500; }
+
+        .review-form { padding: 60px 0 20px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .review-form h3 { font-size: 1.8rem; margin-bottom: 8px; }
+        .review-form p { color: #aaa; margin-bottom: 20px; }
+        .review-form .btn-review {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 100px;
+            background: transparent;
+            border: 1px solid #a855f7;
+            color: #a855f7;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .review-form .btn-review:hover {
+            background: #a855f7;
+            color: #fff;
+            transform: scale(1.03);
+        }
+
+        .contacts { padding: 60px 0 80px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .contacts h2 { font-size: 2.6rem; margin-bottom: 16px; color: #fff; position: relative; display: inline-block; }
+        .contacts h2::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 60px; height: 3px; background: #a855f7; }
+        .contacts p { color: #aaa; margin-bottom: 24px; }
+        .contacts .btn-large { display: inline-block; padding: 16px 44px; border-radius: 100px; background: #a855f7; color: #fff; font-weight: 500; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 0 20px rgba(168, 85, 247, 0.2); }
+        .contacts .btn-large:hover { background: #9333ea; transform: scale(1.04); box-shadow: 0 0 40px rgba(168, 85, 247, 0.3); }
+        .contacts .link-block { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .contacts .link-block a { color: #a855f7; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; transition: 0.2s; }
+        .contacts .link-block a:hover { color: #fff; }
+
+        footer { padding: 24px; text-align: center; font-size: 0.8rem; color: #888; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        footer a { color: #888; text-decoration: underline; transition: 0.2s; }
+        footer a:hover { color: #a855f7; }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; padding: 40px 0 20px; gap: 24px; }
+            .hero-image { max-width: 300px; margin: 0 auto; }
+            .hero-content h1 { font-size: 2.4rem; }
+            .header-inner { flex-direction: column; gap: 12px; align-items: center; }
+            .header-contacts a { margin: 0 8px; }
+            .works h2, .contacts h2, .reviews h2 { font-size: 2rem; }
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="neon-bg">
+        <div class="neon-blob blob-1"></div>
+        <div class="neon-blob blob-2"></div>
+        <div class="neon-blob blob-3"></div>
+    </div>
+
+    <header>
+        <div class="container header-inner">
+            <div class="logo"><span>✦</span> Дмитрий</div>
+            <div class="header-contacts">
+                <a href="mailto:novakdmitry99@gmail.com">Почта</a>
+                <a href="tel:+79005769424">+7 (900) 576-94-24</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <div class="hero-image">
+            <img src="my_photo.jpg" alt="Дмитрий">
+        </div>
+        <div class="hero-content">
+            <h1 class="title">Создаю <span class="accent">стильные</span><br>сайты под ключ</h1>
+            <p class="subtitle">HTML · CSS · Адаптив · Портфолио</p>
+            <div class="about-text">
+                <strong>Привет! Я Дмитрий — верстальщик с чувством вкуса.</strong> Делаю красивые, современные и быстрые лендинги, которые приносят клиентов. Работаю с нуля, без конструкторов.
+            </div>
+            <div class="btn-group">
+                <a href="#works" class="btn btn-primary">Смотреть работы</a>
+                <a href="#contacts" class="btn btn-outline">Связаться</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="works container" id="works">
+        <h2 class="title">Мои проекты</h2>
+        <div class="works-grid">
+
+            <div class="work-card">
+                <h3>Лендинг массажиста</h3>
+                <p>Стильный сайт-визитка с авторским фоном, кнопками соцсетей и адаптивом под телефон.</p>
+                <div class="tag">HTML</div>
+                <div class="tag">CSS</div>
+                <div style="margin-top: 12px;">
+                    <a href="https://polina-massage.github.io/" target="_blank" class="work-link">Посмотреть →</a>
+                </div>
+            </div>
+
+            <div class="work-card">
+                <h3>Сайт для бизнеса</h3>
+                <p>Современный корпоративный лендинг для предпринимателя. Адаптив, портфолио.</p>
+                <div class="tag">HTML</div>
+                <div class="tag">Адаптив</div>
+            </div>
+
+            <div class="work-card">
+                <h3>Универсальный шаблон</h3>
+                <p>Готовый адаптивный шаблон, который можно настроить под любой бизнес.</p>
+                <div class="tag">В работе</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="reviews container" id="reviews">
+        <h2 class="title">Отзывы</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <p>«Очень стильно и профессионально. Сайт приносит мне клиентов каждый день!»</p>
+                <div class="author">— Полина, массажист</div>
+            </div>
+            <div class="review-card">
+                <p>«Быстро, качественно, без лишних вопросов. Полностью доволен результатом.»</p>
+                <div class="author">— Александр, предприниматель</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-form container">
+        <h3 class="title">Оставить отзыв</h3>
+        <p>Поделитесь впечатлениями о работе со мной — это поможет другим клиентам!</p>
+        <a href="https://vk.ru/dmitnova" target="_blank" class="btn-review">Написать в VK →</a>
+    </section>
+
+    <section class="contacts container" id="contacts">
+        <h2 class="title">Обсудим ваш проект</h2>
+        <p>Пишите в Telegram, ВКонтакте или на почту — я отвечаю быстро.</p>
+        <a href="https://t.me/your_telegram" target="_blank" class="btn-large">Заказать сайт</a>
+        <div class="link-block">
+            <a href="mailto:novakdmitry99@gmail.com">novakdmitry99@gmail.com</a>
+            <a href="tel:+79005769424">+7 (900) 576-94-24</a>
+            <a href="https://vk.ru/dmitnova" target="_blank">vk.ru/dmitnova</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            © 2026 Дмитрий · Верстка и дизайн
+            <br><br>
+            <a href="privacy.html">Политика конфиденциальности</a>
+        </div>
+    </footer>
+
+</body>
+</html>
